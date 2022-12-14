@@ -15,7 +15,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var app = (0, _express["default"])();
 var httpServer = _http["default"].createServer(app);
-var io = new _socket.Server(httpServer);
+var io = new _socket.Server(httpServer, {
+  cors: {
+    origin: "https://socket-freewaves-production.up.railway.app/"
+  }
+});
 app.use(_express["default"]["static"](__dirname + "/public"));
 app.use(_express["default"].json());
 var STORE = [];
