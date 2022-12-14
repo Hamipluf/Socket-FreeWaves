@@ -6,7 +6,11 @@ import { PORT } from "./config.js"; // config de produccion
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new SocketServer(httpServer);
+const io = new SocketServer(httpServer, {
+  cors: {
+    origin: "https://socket-freewaves-production.up.railway.app/",
+  },
+});
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
