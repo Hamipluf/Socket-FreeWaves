@@ -3,7 +3,6 @@ import { Server as SocketServer } from "socket.io";
 import http from "http";
 import { z } from "zod";
 import { PORT } from "./config.js"; // config de produccion
-import { resolve } from "path";
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -23,13 +22,11 @@ const objectSchema = z.object({
 
 const procesadoApi = async (evento) => {
   try {
-    const schemaResult = objectSchema.parse(evento);
-    // console.log(schemaResult)
+    const schemaResult = objectSchema.parse(evento); // Uso verificacion de input
     const obj = evento;
-    // console.log(obj)
     const evento_en_store = STORE.filter((ev) => ev.type == obj.type)[0];
-    // console.log(evento_en_store)
     if (!evento_en_store) {
+      // si no existe un evento previo del mismo tipo se crea
       const primer_evento_del_tipo = {
         name: obj.name,
         image: obj.image,
@@ -41,10 +38,10 @@ const procesadoApi = async (evento) => {
       STORE.push(primer_evento_del_tipo);
       return STORE;
     } else {
+      // si ya existe un evento del mismo tipo se actualiza
       evento_en_store.count++;
       evento_en_store.timestamp = new Date(); // creando el timestamp en cada evento nuevo
-      STORE.filter((evento_en_store) => evento_en_store.type !== obj.type);
-      // console.log(STORE);
+      STORE.filter((evento_en_store) => evento_en_store.type !== obj.type); //filtrando los eventos del mismo tipo
     }
   } catch (error) {
     console.error(error);
@@ -52,15 +49,12 @@ const procesadoApi = async (evento) => {
 };
 
 io.on("connection", (socket) => {
-  //   console.log("id user : ", socket.id);
-  // console.log(STORE);
-  socket.broadcast.emit("server:STORE", STORE); // primer evento al cargar la pag
+  socket.emit("server:STORE", STORE); // primer evento al cargar la pag
 
-  socket.on("cliente:EVENTO", async (data)=> {
-   await procesadoApi(data); // logica de la api
+  socket.on("cliente:EVENTO", async (data) => {
+    await procesadoApi(data); // logica del procesado de eventos
     const dataEvento = { ...data, id: socket.id }; // Agrego el id para identificar el evento, si no se necesita eliminar esta linea
-    // console.log(STORE);
-    socket.broadcast.emit("server:EVENTO", {
+    socket.emit("server:EVENTO", {
       dataEvento: dataEvento,
       dataEventoProcesado: STORE,
     });

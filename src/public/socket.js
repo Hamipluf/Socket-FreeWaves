@@ -11,6 +11,7 @@ const enviado = document.querySelector("#enviado");
 // primera conexion, recibe el broadcast del STORE y emite un evento de conexion
 socket.on("connect", () => {
   console.log("conected");
+
   socket.on("server:STORE", (data) => {
     console.log("Store actual:", data); // cuando se carga el cliente te muestra el store por consola
   });
@@ -26,10 +27,11 @@ socket.on("connect", () => {
   socket.on("server:EVENTO", (data) => {
     const { dataEvento, dataEventoProcesado } = data;
     brEvent(dataEvento); // funcion en ui.js... Para mostrar los datos del brodcast evento sin procesar
-    brEventProceced(dataEventoProcesado);// funcion en ui.js... Para mostrar los datos del brodcast evento procesado
-  }); 
+    brEventProceced(dataEventoProcesado); // funcion en ui.js... Para mostrar los datos del brodcast evento procesado
+  });
 });
-btn_enviar_evento.addEventListener("click", (e) => { // se emite un evento con el boton enviar al ws
+btn_enviar_evento.addEventListener("click", (e) => {
+  // se emite un evento con el boton enviar al ws
   e.preventDefault();
   console.log("enviando WS");
   enviado.innerHTML = `<h1>ENVIADO WS ✈</h1>`;

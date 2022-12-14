@@ -19,15 +19,13 @@ const brEvent = (dataEvento) => {
 
 // Brodcast FreeWaves evento procesado
 const brEventProceced = (dataEventoProcesado) => {
-  // console.log("EVENTO ACTUALIZADO", dataEventoProcesado)
-  const EVENTO_ACT = dataEventoProcesado.map((evento) => {
-    console.log(
-      `Broadcast del evento ACTUALIZADO:(cantidad:${dataEventoProcesado.length})`,
-      dataEventoProcesado
-    );
-    const { name, image, message, type, count, timestamp } =
-      dataEventoProcesado[0];
-    ventana_br_ACT.innerHTML = ` <ul>
+  console.log(
+    `Broadcast del evento ACTUALIZADO:(cantidad:${dataEventoProcesado.length})`,
+    dataEventoProcesado
+  );
+  const { name, image, message, type, count, timestamp } =
+    dataEventoProcesado[0];
+  ventana_br_ACT.innerHTML = ` <ul>
     <li>Name:${name}</li>
     <li>Image: ${image}</li>
     <li>Message: ${message}</li>
@@ -35,5 +33,4 @@ const brEventProceced = (dataEventoProcesado) => {
     <li>Count: ${count}</li>
     <li>Timestamp: ${timestamp}</li>
     </ul>`;
-  });
 };
