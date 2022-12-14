@@ -1,19 +1,22 @@
 import express from "express";
 import { Server as SocketServer } from "socket.io";
 import http from "http";
+import cors from 'cors'
 import { z } from "zod";
 import { PORT } from "./config.js"; // config de produccion
+
 
 const app = express();
 const httpServer = http.createServer(app);
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: "https://socket-freewaves-production.up.railway.app/",
+    origin: "https://socket-freewaves-production.up.railway.app/socket.io/?EIO=4&transport=polling&t=OKHFGTO",
   },
 });
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
+app.use(cors())
 var STORE = [];
 
 const objectSchema = z.object({
@@ -66,5 +69,5 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log("server en el puerto", PORT);
+  console.log("CORS-Activado y server en el puerto", PORT);
 });
