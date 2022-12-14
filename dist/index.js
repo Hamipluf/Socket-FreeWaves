@@ -9,9 +9,10 @@ var _socket = require("socket.io");
 var _http = _interopRequireDefault(require("http"));
 var _zod = require("zod");
 var _config = require("./config.js");
-var _path = require("path");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// config de produccion
+
 var app = (0, _express["default"])();
 var httpServer = _http["default"].createServer(app);
 var io = new _socket.Server(httpServer);
@@ -33,15 +34,16 @@ var procesadoApi = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            schemaResult = objectSchema.parse(evento); // console.log(schemaResult)
-            obj = evento; // console.log(obj)
+            schemaResult = objectSchema.parse(evento); // Uso verificacion de input
+            obj = evento;
             evento_en_store = STORE.filter(function (ev) {
               return ev.type == obj.type;
-            })[0]; // console.log(evento_en_store)
+            })[0];
             if (evento_en_store) {
               _context.next = 10;
               break;
             }
+            // si no existe un evento previo del mismo tipo se crea
             primer_evento_del_tipo = {
               name: obj.name,
               image: obj.image,
@@ -54,12 +56,12 @@ var procesadoApi = /*#__PURE__*/function () {
             STORE.push(primer_evento_del_tipo);
             return _context.abrupt("return", STORE);
           case 10:
+            // si ya existe un evento del mismo tipo se actualiza
             evento_en_store.count++;
             evento_en_store.timestamp = new Date(); // creando el timestamp en cada evento nuevo
             STORE.filter(function (evento_en_store) {
               return evento_en_store.type !== obj.type;
-            });
-            // console.log(STORE);
+            }); //filtrando los eventos del mismo tipo
           case 13:
             _context.next = 18;
             break;
@@ -79,9 +81,7 @@ var procesadoApi = /*#__PURE__*/function () {
   };
 }();
 io.on("connection", function (socket) {
-  //   console.log("id user : ", socket.id);
-  // console.log(STORE);
-  socket.broadcast.emit("server:STORE", STORE); // primer evento al cargar la pag
+  socket.emit("server:STORE", STORE); // primer evento al cargar la pag
 
   socket.on("cliente:EVENTO", /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(data) {
@@ -93,12 +93,11 @@ io.on("connection", function (socket) {
               _context2.next = 2;
               return procesadoApi(data);
             case 2:
-              // logica de la api
+              // logica del procesado de eventos
               dataEvento = _objectSpread(_objectSpread({}, data), {}, {
                 id: socket.id
               }); // Agrego el id para identificar el evento, si no se necesita eliminar esta linea
-              // console.log(STORE);
-              socket.broadcast.emit("server:EVENTO", {
+              socket.emit("server:EVENTO", {
                 dataEvento: dataEvento,
                 dataEventoProcesado: STORE
               });
