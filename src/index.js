@@ -10,7 +10,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: "https://socket-freewaves-production.up.railway.app/socket.io/?EIO=4&transport=polling&t=OKHFGTO",
+    origin: "https://socket-freewaves-production.up.railway.app/",
   },
 });
 

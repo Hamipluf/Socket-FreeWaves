@@ -7,6 +7,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = _interopRequireDefault(require("express"));
 var _socket = require("socket.io");
 var _http = _interopRequireDefault(require("http"));
+var _cors = _interopRequireDefault(require("cors"));
 var _zod = require("zod");
 var _config = require("./config.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -22,6 +23,7 @@ var io = new _socket.Server(httpServer, {
 });
 app.use(_express["default"]["static"](__dirname + "/public"));
 app.use(_express["default"].json());
+app.use((0, _cors["default"])());
 var STORE = [];
 var objectSchema = _zod.z.object({
   // Verificacion Inputs
@@ -118,5 +120,5 @@ io.on("connection", function (socket) {
   }());
 });
 httpServer.listen(_config.PORT, function () {
-  console.log("server en el puerto", _config.PORT);
+  console.log("CORS-Activado y server en el puerto", _config.PORT);
 });
