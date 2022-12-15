@@ -43,7 +43,7 @@ socket.on("connect", () => {
         message: "Mensaje", 
 	name: "Risa"
 	timestamp: "2022-12-15T13:16:51."//Marca de tiempo del ultimo evento del mismo tipo
-    type: "Reacción 1", 
+        type: "Reacción 1", 
 }
 ```
 #####Pagina del desarrollador
