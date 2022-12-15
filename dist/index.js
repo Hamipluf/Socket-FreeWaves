@@ -7,7 +7,6 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = _interopRequireDefault(require("express"));
 var _socket = require("socket.io");
 var _http = _interopRequireDefault(require("http"));
-var _cors = _interopRequireDefault(require("cors"));
 var _zod = require("zod");
 var _config = require("./config.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -18,12 +17,11 @@ var app = (0, _express["default"])();
 var httpServer = _http["default"].createServer(app);
 var io = new _socket.Server(httpServer, {
   cors: {
-    origin: "https://socket-freewaves-production.up.railway.app/"
+    origin: "*"
   }
 });
 app.use(_express["default"]["static"](__dirname + "/public"));
 app.use(_express["default"].json());
-app.use((0, _cors["default"])());
 var STORE = [];
 var objectSchema = _zod.z.object({
   // Verificacion Inputs
