@@ -46,13 +46,14 @@ socket.on("connect", () => {
         type: "Reacción 1", 
 }
 ```
-#####Pagina del desarrollador
+##### Pagina del desarrollador
 
 ¡Hola! Mi nombre es Ramiro Gumma y soy Frontend Developer. Para contactarse con migo pude ingresar a mi portafolio web:
 https://portafolio-nextjs-omega.vercel.app/
 Gracias por su atención.
 
-###Links personales
+### Links personales
 
 `<link>` <https://www.linkedin.com/in/ramiro-gabriel-gumma-400993240/>
+
 `<link>` <https://www.workana.com/freelancer/b85e703950de6afa717ace9a8327c73a>
