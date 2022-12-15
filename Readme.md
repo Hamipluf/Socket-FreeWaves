@@ -3,7 +3,7 @@
 ![](./src/public/logo.png)
 
 
-#Primera conexión 
+# Primera conexión 
 ###### Recibe  un evento de conexión y el primer evento actualizado
 ```javascript
 socket.on("connect", () => {
@@ -14,7 +14,7 @@ socket.on("connect", () => {
   });
 ```
 
-#Emitir Evento
+# Emitir Evento
 ##### Para emitir el evento al Web Socket usamos el nombre del evento "cliente:EVENTO"(todo lo que empiece por cliente: es del lado del cliente). El cual recibe un objeto con la forma como se muestra.
 ```javascript
 	socket.emit("cliente:EVENTO", {
@@ -25,7 +25,7 @@ socket.on("connect", () => {
   });
 ```
 
-#Escucha de Evento
+# Escucha de Evento
 ##### Para emitir el evento al Web Socket usamos el nombre del evento "server:EVENTO".  El cual recibe el objeto procesado por el lado del servidor del Web Socket 
 ```javascript
   socket.on("server:EVENTO", (data) => {
