@@ -27,7 +27,7 @@ app.post("/", function (req, res) {
     var schemaResult = objectSchema.parse(req.body);
     var obj = req.body;
     var evento_en_store = STORE.filter(function (ev) {
-      return ev.type == obj.type;
+      return ev.name == obj.name;
     })[0];
     if (!evento_en_store) {
       // si no existe un evento previo del mismo tipo se crea
@@ -46,7 +46,7 @@ app.post("/", function (req, res) {
       evento_en_store.count++;
       evento_en_store.timestamp = new Date(); // creando el timestamp en cada evento nuevo
       STORE.some(function (evento_en_store) {
-        return evento_en_store.type !== obj.type;
+        return evento_en_store.name !== obj.name;
       }); //filtrando los eventos del mismo tipo
     }
     // console.log(STORE);
@@ -65,6 +65,9 @@ app.post("/", function (req, res) {
       });
     }
   }
+});
+app.get("/", function (req, res) {
+  res.status(200).json(STORE);
 });
 app.listen(_config.PORT, function () {
   console.log("CORS-Activado y server en el puerto", _config.PORT);

@@ -28,7 +28,7 @@ app.post("/", (req, res) => {
   try {
     const schemaResult = objectSchema.parse(req.body);
     const obj = req.body;
-    const evento_en_store = STORE.filter((ev) => ev.type == obj.type)[0];
+    const evento_en_store = STORE.filter((ev) => ev.name == obj.name)[0];
     if (!evento_en_store) {
       // si no existe un evento previo del mismo tipo se crea
       const primer_evento_del_tipo = {
@@ -44,7 +44,7 @@ app.post("/", (req, res) => {
       // si ya existe un evento del mismo tipo se actualiza
       evento_en_store.count++;
       evento_en_store.timestamp = new Date(); // creando el timestamp en cada evento nuevo
-      STORE.some((evento_en_store) => evento_en_store.type !== obj.type); //filtrando los eventos del mismo tipo
+      STORE.some((evento_en_store) => evento_en_store.name !== obj.name); //filtrando los eventos del mismo tipo
     }
     // console.log(STORE);
     res.status(200).json(STORE);
@@ -61,6 +61,10 @@ app.post("/", (req, res) => {
       });
     }
   }
+});
+
+app.get("/", (req, res) => {
+  res.status(200).json(STORE);
 });
 
 app.listen(PORT, () => {
