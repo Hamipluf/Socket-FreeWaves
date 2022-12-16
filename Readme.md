@@ -56,18 +56,18 @@ body: JSON.stringify({
 
 ##### En la respuesta le va a traer a trabes del body un arreglo con objetos que poseen distinto nombre (type, message, image, pueden ser iguales )
 
-    	"count": 1 //contador que incrementa dependiendo del name
+    	[{"count": 1 //contador que incrementa dependiendo del name
     	"image": "https://risa.jpg.com",
       "message": "Mensaje",
     	"name": "Risa"
     	"timestamp": "2022-12-15T13:16:51." //marca del ultimo evento
-      "type": "Reacción 1",
+      "type": "Reacción 1",}]
 
 ##### Codigos de respuesta
 
 `200: (evento recibido) el evento fue recibido en el servidor `<br/>
-`400: (BadRequest) los datos enviados son incorrectos`
-`404: (NotFuound) no se encontro la informacion`
+`400: (BadRequest) los datos enviados son incorrectos`<br/>
+`404: (NotFuound) no se encontro la informacion`<br/>
 `500: error en el servidor`
 
 ##### Pagina del desarrollador
