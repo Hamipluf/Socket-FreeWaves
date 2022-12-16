@@ -46,7 +46,8 @@ const procesadoApi = async (evento) => {
       // si ya existe un evento del mismo tipo se actualiza
       evento_en_store.count++;
       evento_en_store.timestamp = new Date(); // creando el timestamp en cada evento nuevo
-      STORE.filter((evento_en_store) => evento_en_store.type !== obj.type); //filtrando los eventos del mismo tipo
+      STORE.some((evento_en_store) => evento_en_store.type !== obj.type); //filtrando los eventos del mismo tipo
+      console.log(STORE)
     }
   } catch (error) {
     console.error(error);
