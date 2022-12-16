@@ -14,7 +14,7 @@
       <input type="text" id="image" name="image" value="Url bandera arg" placeholder="image" />
       <input type="text" id="message" name="message" value="Vamos argentina!!" placeholder="message" />
       <input type="text" id="type" name="type" value="Reaccion" placeholder="type" />
-      <button id="enviar_evento" class="btn">Enviar Evento al Websocket
+      <button id="enviar_evento" class="btn">Enviar Evento a la API
       </button>
     </form>
     <div id="error" class="error"></div>
@@ -23,16 +23,15 @@
       <div class="enviado" id="enviado"></div>
       <hr />
       <div class="ventana_evento">
-        <label>Broadcast del evento sin procesar:</label>
+        <label>Evento sin procesar:</label>
         <div class="ventana_evento_send"" id="ventana_br"></div>
       </div>
       <div class="ventana_evento">
-        <label>Brodcast FreeWaves evento procesado:</label>
+        <label>Evento procesado:</label>
         <div class="ventana_evento_send"" id="ventana_br_ACT"></div>
      </div>
     </div>
 
-    <script src="/socket.io/socket.io.min.js"></script>
     <script src="./socket.js"></script>
     <script src="./ui.js"></script>
   </body>
