@@ -16,17 +16,19 @@ fetch("https://socket-freewaves-production.up.railway.app/", {
 
 ##### En la misma ruta pero con metodo get pueden ver un panel que les muestra todos los eventos mandados.
 
->
-[
- {
+> [
+> {
+
     "count": 1
     "image": "https://risa.jpg.com",
     "message": "Mensaje",
     "name": "Risa"
     "timestamp": "2022-12-15T13:16:51."
     "type": "Reacción 1",
+
 }
 ]
+
 >
 
 # Enviar a la API
@@ -34,12 +36,12 @@ fetch("https://socket-freewaves-production.up.railway.app/", {
 ##### En el body del fetch se tiene que mandar un objeto como el siguiente
 
 ```javascript
-  body: JSON.stringify({
-      name: "Risa", //string || null
-      image: "https://risa.jpg.com", //string || null
-      message:"Mensaje", //string || null
-      type: "Reacción 1"//string || null
-    })
+body: JSON.stringify({
+  name: "Risa", //string || null
+  image: "https://risa.jpg.com", //string || null
+  message: "Mensaje", //string || null
+  type: "Reacción 1", //string || null
+});
 ```
 
 ##### Headers
@@ -63,7 +65,7 @@ fetch("https://socket-freewaves-production.up.railway.app/", {
 
 ##### Codigos de respuesta
 
-`200: (evento recibido) el evento fue recibido en el servidor `
+`200: (evento recibido) el evento fue recibido en el servidor `<br/>
 `400: (BadRequest) los datos enviados son incorrectos`
 `404: (NotFuound) no se encontro la informacion`
 `500: error en el servidor`
