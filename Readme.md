@@ -1,51 +1,73 @@
-# Socket FreeWaves
+# API FreeWaves `1.0.0`
 
 ![](./src/public/logo.png)
 
+`URL endpoit: https://socket-freewaves-production.up.railway.app/`
 
-# Primera conexión 
-###### Recibe  un evento de conexión y el primer evento actualizado
+# Endpoint
+
+##### Recibe el evento por metodo POST, lo procesa dependiendo del nombre y le agrega una marca de tiempo con un contador por evento, ademas de verificar si los datos enviados son validos.
+
 ```javascript
-socket.on("connect", () => {
-  console.log("conected");
-
-  socket.on("server:STORE", (data) => {
-    console.log("Store actual:", data); 
-  });
+fetch("https://socket-freewaves-production.up.railway.app/", {
+  method: "POST",
+});
 ```
 
-# Emitir Evento
-##### Para emitir el evento al Web Socket usamos el nombre del evento "cliente:EVENTO"(todo lo que empiece por cliente: es del lado del cliente). El cual recibe un objeto con la forma como se muestra.
-```javascript
-	socket.emit("cliente:EVENTO", {
-    name: "Risa", //Nombre el evento
-    image: "https://risa.jpg.com", //Url de la imagen
-    message: "Mensaje", //String
-    type: "Reacción 1", //Tipo de evento
-  });
-```
+##### En la misma ruta pero con metodo get pueden ver un panel que les muestra todos los eventos mandados.
 
-# Escucha de Evento
-##### Para emitir el evento al Web Socket usamos el nombre del evento "server:EVENTO".  El cual recibe el objeto procesado por el lado del servidor del Web Socket 
-```javascript
-  socket.on("server:EVENTO", (data) => {
-  // Por comodidad pueden descontracturar 
-    const { dataEvento, dataEventoProcesado } = data;
-  console.log(dataEvento);
-  console.log(dataEventoProcesado);
-  });
-```
-###### Devolvería el evento procesado: 
-```javascript
-{  
-	count: 1 //Contador de eventos del mismo tipo
-	image: "https://risa.jpg.com", 
-        message: "Mensaje", 
-	name: "Risa"
-	timestamp: "2022-12-15T13:16:51."//Marca de tiempo del ultimo evento del mismo tipo
-        type: "Reacción 1", 
+> [
+> {
+
+    "count": 1
+    "image": "https://risa.jpg.com",
+        "message": "Mensaje",
+    "name": "Risa"
+    "timestamp": "2022-12-15T13:16:51."
+        "type": "Reacción 1",
+
 }
+]
+
+# Enviar a la API
+
+##### En el body del fetch se tiene que mandar un objeto como el siguiente
+
+```javascript
+  body: JSON.stringify({
+      name: "Risa", //string || null
+      image: "https://risa.jpg.com", //string || null
+      message:"Mensaje", //string || null
+      type: "Reacción 1"//string || null
+    })
 ```
+
+##### Headers
+
+```javascript
+   headers: {
+      "Content-Type": "application/json",
+    },
+```
+
+# Respuesta de la API
+
+##### En la respuesta le va a traer a trabes del body un arreglo con objetos que poseen distinto nombre (type, message, image, pueden ser iguales )
+
+    	"count": 1 //contador que incrementa dependiendo del name
+    	"image": "https://risa.jpg.com",
+        "message": "Mensaje",
+    	"name": "Risa"
+    	"timestamp": "2022-12-15T13:16:51." //marca del ultimo evento
+         "type": "Reacción 1",
+
+##### Codigos de respuesta
+
+`200: (evento recibido) el evento fue recibido en el servidor `
+`400: (BadRequest) los datos enviados son incorrectos`
+`404: (NotFuound) no se encontro la informacion`
+`500: error en el servidor`
+
 ##### Pagina del desarrollador
 
 ¡Hola! Mi nombre es Ramiro Gumma y soy Frontend Developer. Para contactarse con migo pude ingresar a mi portafolio web:
