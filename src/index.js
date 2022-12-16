@@ -15,10 +15,10 @@ app.use(express.json());
 
 const objectSchema = z.object({
   // Verificacion Inputs
-  name: z.string().min(1, "Name es requerido"),
-  image: z.string().min(1, "image es requerida"),
-  message: z.string().min(1, "message es requerido"),
-  type: z.string().min(1, "type es requerido"),
+  name: z.string().min(1, "Name es requerido").nullish(),
+  image: z.string().min(1, "image es requerida").nullish(),
+  message: z.string().min(1, "message es requerido").nullish(),
+  type: z.string().min(1, "type es requerido").nullish(),
 });
 
 var STORE = [];
