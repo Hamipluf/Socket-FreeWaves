@@ -16,18 +16,18 @@ fetch("https://socket-freewaves-production.up.railway.app/", {
 
 ##### En la misma ruta pero con metodo get pueden ver un panel que les muestra todos los eventos mandados.
 
-> [
-> {
-
+>
+[
+ {
     "count": 1
     "image": "https://risa.jpg.com",
-        "message": "Mensaje",
+    "message": "Mensaje",
     "name": "Risa"
     "timestamp": "2022-12-15T13:16:51."
-        "type": "Reacción 1",
-
+    "type": "Reacción 1",
 }
 ]
+>
 
 # Enviar a la API
 
@@ -56,10 +56,10 @@ fetch("https://socket-freewaves-production.up.railway.app/", {
 
     	"count": 1 //contador que incrementa dependiendo del name
     	"image": "https://risa.jpg.com",
-        "message": "Mensaje",
+      "message": "Mensaje",
     	"name": "Risa"
     	"timestamp": "2022-12-15T13:16:51." //marca del ultimo evento
-         "type": "Reacción 1",
+      "type": "Reacción 1",
 
 ##### Codigos de respuesta
 
