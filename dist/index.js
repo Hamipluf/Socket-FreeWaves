@@ -15,10 +15,10 @@ app.use(cors({
 app.use(_express["default"].json());
 var objectSchema = _zod.z.object({
   // Verificacion Inputs
-  name: _zod.z.string().min(1, "Name es requerido"),
-  image: _zod.z.string().min(1, "image es requerida"),
-  message: _zod.z.string().min(1, "message es requerido"),
-  type: _zod.z.string().min(1, "type es requerido")
+  name: _zod.z.string().min(1, "Name es requerido").nullish(),
+  image: _zod.z.string().min(1, "image es requerida").nullish(),
+  message: _zod.z.string().min(1, "message es requerido").nullish(),
+  type: _zod.z.string().min(1, "type es requerido").nullish()
 });
 var STORE = [];
 app.post("/", function (req, res) {
