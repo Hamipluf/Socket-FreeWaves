@@ -2,7 +2,7 @@
 
 ![](./src/public/logo.png)
 
-`URL endpoit: https://socket-freewaves-production.up.railway.app/`
+`URL endpoit: https://socket-freewaves-production.up.railway.app/`  (No disponible)
 
 # Endpoint
 
