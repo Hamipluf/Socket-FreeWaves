@@ -75,7 +75,7 @@ body: JSON.stringify({
 ##### Pagina del desarrollador
 
 ¡Hola! Mi nombre es Ramiro Gumma y soy Frontend Developer. Para contactarse con migo pude ingresar a mi portafolio web:
-https://portafolio-astro-1c9nbugm0-hamiplufs-projects.vercel.app/
+https://portafolio-astro-mocha.vercel.app/certificates/
 Gracias por su atención.
 
 ### Links personales
